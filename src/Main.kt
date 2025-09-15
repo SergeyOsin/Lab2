@@ -1,0 +1,6 @@
+
+
+fun main() {
+    val a=3;
+    println(a*2);
+}
