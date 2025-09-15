@@ -1,6 +1,8 @@
 
 
 fun main() {
-    val a=3;
-    println(a*2);
+    val k=3;
+    for (k in 1..3)
+        println(k*3);
+    return;
 }
