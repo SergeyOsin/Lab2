@@ -50,13 +50,37 @@ class ApartamentList() {
             else -> return null
         }
     }
+
     /*
     использовать when для критериев
     использовать sortBy для сортировки по возрастанию
     использовать sortByDescending для сортировки по убыванию
      */
-    fun sort(sortCrit: SortCriteria, propCrit: PropertyCriteria){
-        innerDataBase.sortBy {  }
+    fun sort(sortCrit: SortCriteria, propCrit: PropertyCriteria): Unit {
+        when (sortCrit) {
+            SortCriteria.STRAIGHT ->
+                when (propCrit) {
+                    PropertyCriteria.AREA -> innerDataBase.sortBy { it.Area }
+                    PropertyCriteria.NUMB -> innerDataBase.sortBy { it.Numb }
+                    PropertyCriteria.RENT -> innerDataBase.sortBy { it.Rent }
+                    PropertyCriteria.CNTROOMS -> innerDataBase.sortBy { it.cntRooms }
+                    else-> return
+                }
+
+            SortCriteria.REVERSE ->
+                when (propCrit) {
+                    PropertyCriteria.AREA -> innerDataBase.sortBy { it.Area }
+                    PropertyCriteria.NUMB -> innerDataBase.sortBy { it.Numb }
+                    PropertyCriteria.RENT -> innerDataBase.sortBy { it.Rent }
+                    PropertyCriteria.CNTROOMS -> innerDataBase.sortBy { it.cntRooms }
+                    else -> return
+                }
+        }
+        return
+    }
+
+    fun search(numb: Int): Apartament? {
+        return innerDataBase.find{it.Numb == numb}
     }
 
 }
