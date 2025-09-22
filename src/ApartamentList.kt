@@ -1,7 +1,7 @@
 package app
 
 enum class PropertyCriteria {
-    RENT, NUMB, ELECTRICITY, UTILITIES
+    RENT, NUMB, AREA, CNTROOMS
 }
 
 enum class SortCriteria {
@@ -39,13 +39,13 @@ class ApartamentList() {
                  return innerDataBase.filter{
                     it.Numb.toString().startsWith(crit.toString())
                 }
-            PropertyCriteria.ELECTRICITY ->
+            PropertyCriteria.AREA ->
                 return innerDataBase.filter {
-                    it.Electricity.toString().startsWith(crit.toString())
+                    it.Area.toString().startsWith(crit.toString())
                 }
-            PropertyCriteria.UTILITIES ->
+            PropertyCriteria.CNTROOMS->
                 return  innerDataBase.filter {
-                    it.Utilities.toString().startsWith(crit.toString())
+                    it.cntRooms.toString().startsWith(crit.toString())
                 }
             else -> return null
         }

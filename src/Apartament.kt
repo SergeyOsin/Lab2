@@ -1,2 +1,2 @@
 package app
-data class Apartament(var Rent: Int, var Electricity: Double, var Utilities: Double, var Numb: Int) {}
+data class Apartament(var Rent: Double, var Numb: Int, var Area: Double, var cntRooms: Int) {}
