@@ -69,10 +69,10 @@ class ApartamentList() {
 
             SortCriteria.REVERSE ->
                 when (propCrit) {
-                    PropertyCriteria.AREA -> innerDataBase.sortBy { it.Area }
-                    PropertyCriteria.NUMB -> innerDataBase.sortBy { it.Numb }
-                    PropertyCriteria.RENT -> innerDataBase.sortBy { it.Rent }
-                    PropertyCriteria.CNTROOMS -> innerDataBase.sortBy { it.cntRooms }
+                    PropertyCriteria.AREA -> innerDataBase.sortByDescending { it.Area }
+                    PropertyCriteria.NUMB -> innerDataBase.sortByDescending { it.Numb }
+                    PropertyCriteria.RENT -> innerDataBase.sortByDescending { it.Rent }
+                    PropertyCriteria.CNTROOMS -> innerDataBase.sortByDescending { it.cntRooms }
                     else -> return
                 }
         }
