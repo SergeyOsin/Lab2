@@ -93,11 +93,13 @@ class ApartamentList() {
         return
     }
 
-    infix fun search(numb: Int): Apartament? {
+    fun search(numb: Int): Apartament? {
         return innerDataBase.find{it.adress.ApartmentNumb == numb}
     }
 
-
+    infix fun select(apartNumb: Int): Apartament? {
+         return this.search(apartNumb)
+    }
 
 }
 
