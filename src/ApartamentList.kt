@@ -1,7 +1,7 @@
 package app
 
 enum class PropertyCriteria {
-    RENT, NUMB, AREA, CNTROOMS
+    RENT, NUMB, AREA, CNTROOMS, ISRENTED
 }
 
 enum class SortCriteria {
@@ -13,7 +13,7 @@ class ApartamentList() {
     private val innerDataBase: MutableList<Apartament> = mutableListOf()
 
     fun add(appart: Apartament): Boolean{
-        if (innerDataBase.find {it.Numb == appart.Numb} == null){
+        if (innerDataBase.find {it.adress.ApartmentNumb == appart.adress.ApartmentNumb} == null){
             innerDataBase.add(appart)
             return true
         }
@@ -21,7 +21,7 @@ class ApartamentList() {
     }
 
     fun delete(numb: Int): Boolean{
-        var apart: Apartament? = innerDataBase.find {it.Numb == numb}
+        var apart: Apartament? = innerDataBase.find {it.adress.ApartmentNumb == numb}
         if (apart != null){
             innerDataBase.remove(apart)
             return true
@@ -35,9 +35,9 @@ class ApartamentList() {
                 return innerDataBase.filter{
                     it.Rent.toString().startsWith(crit.toString())
                 }
-            PropertyCriteria.NUMB ->
+            PropertyCriteria.NUMB->
                  return innerDataBase.filter{
-                    it.Numb.toString().startsWith(crit.toString())
+                    it.adress.ApartmentNumb.toString().startsWith(crit.toString())
                 }
             PropertyCriteria.AREA ->
                 return innerDataBase.filter {
@@ -45,34 +45,33 @@ class ApartamentList() {
                 }
             PropertyCriteria.CNTROOMS->
                 return  innerDataBase.filter {
-                    it.cntRooms.toString().startsWith(crit.toString())
+                    it.CntRooms.toString().startsWith(crit.toString())
+                }
+            PropertyCriteria.ISRENTED ->
+                return innerDataBase.filter {
+                    it.IsRented.toString().startsWith(crit.toString())
                 }
             else -> return null
         }
     }
-
-    /*
-    использовать when для критериев
-    использовать sortBy для сортировки по возрастанию
-    использовать sortByDescending для сортировки по убыванию
-     */
+    
     fun sort(sortCrit: SortCriteria, propCrit: PropertyCriteria): Unit {
         when (sortCrit) {
             SortCriteria.STRAIGHT ->
                 when (propCrit) {
                     PropertyCriteria.AREA -> innerDataBase.sortBy { it.Area }
-                    PropertyCriteria.NUMB -> innerDataBase.sortBy { it.Numb }
+                    PropertyCriteria.NUMB -> innerDataBase.sortBy { it.adress.ApartmentNumb }
                     PropertyCriteria.RENT -> innerDataBase.sortBy { it.Rent }
-                    PropertyCriteria.CNTROOMS -> innerDataBase.sortBy { it.cntRooms }
+                    PropertyCriteria.CNTROOMS -> innerDataBase.sortBy { it.CntRooms }
                     else-> return
                 }
 
             SortCriteria.REVERSE ->
                 when (propCrit) {
                     PropertyCriteria.AREA -> innerDataBase.sortByDescending { it.Area }
-                    PropertyCriteria.NUMB -> innerDataBase.sortByDescending { it.Numb }
+                    PropertyCriteria.NUMB -> innerDataBase.sortByDescending { it.adress.ApartmentNumb }
                     PropertyCriteria.RENT -> innerDataBase.sortByDescending { it.Rent }
-                    PropertyCriteria.CNTROOMS -> innerDataBase.sortByDescending { it.cntRooms }
+                    PropertyCriteria.CNTROOMS -> innerDataBase.sortByDescending { it.CntRooms }
                     else -> return
                 }
         }
@@ -80,7 +79,7 @@ class ApartamentList() {
     }
 
     fun search(numb: Int): Apartament? {
-        return innerDataBase.find{it.Numb == numb}
+        return innerDataBase.find{it.adress.ApartmentNumb == numb}
     }
 
 }
