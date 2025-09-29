@@ -6,10 +6,19 @@ data class Apartament(var Rent: Double, var adress: Adress, var Area: Double, va
         return Apartament(this.Rent + other, this.adress, this.Area, this.CntRooms, this.IsRented)
     }
 
-    
-    //    override fun toString(): String {
-//        //return super.toString()
-//    }
+    operator fun inc(): Apartament {
+        this.Rent + 1
+        return this
+    }
+
+    override fun toString(): String {
+        return "Квартира №${adress.ApartmentNumb} | " +
+                "Площадь: $Area м² | " +
+                "Комнат: $CntRooms | " +
+                "Аренда: $Rent руб/мес | " +
+                "Статус: ${if (IsRented) "Сдана" else "Свободна"}"
+    }
+
 }
 
 data class Adress(var Street: String, var ApartmentNumb: Int, var HouseNumb: Int){}
