@@ -2,13 +2,21 @@ package app
 data class Apartament(var Rent: Double, var adress: Adress, var Area: Double, var CntRooms: Int,
     var IsRented: Boolean) {
 
-    operator fun plus(other: Int): Apartament {
+    operator fun plus(other: Double): Apartament {
+        return Apartament(this.Rent + other, this.adress, this.Area, this.CntRooms, this.IsRented)
+    }
+
+    operator fun minus(other: Double): Apartament {
+        if (this.Rent -  other < 0) {return this}
         return Apartament(this.Rent + other, this.adress, this.Area, this.CntRooms, this.IsRented)
     }
 
     operator fun inc(): Apartament {
-        this.Rent + 1
-        return this
+        return this + 1.0
+    }
+
+    operator fun dec(): Apartament {
+        return this - 1.0;
     }
 
     override fun toString(): String {

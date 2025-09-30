@@ -17,6 +17,9 @@ class ApartamentList() {
 
     private val innerDataBase: MutableList<Apartament> = mutableListOf()
 
+    fun printall(): MutableList<Apartament> {
+        return innerDataBase;
+    }
     fun add(appart: Apartament): Boolean{
         if (innerDataBase.find {it.adress.ApartmentNumb == appart.adress.ApartmentNumb} == null){
             innerDataBase.add(appart)
@@ -34,15 +37,12 @@ class ApartamentList() {
         return false
     }
 
-    object by {
-        operator fun invoke(typeAndProperty: Pair<String, PropertyCriteria>) = typeAndProperty
-        operator fun invoke(sortAndPropCriterias: Pair<SortCriteria, PropertyCriteria>) =
-            sortAndPropCriterias
-    }
+    fun by(crit: String, typeCrit: PropertyCriteria) = Pair <String, PropertyCriteria>(crit, typeCrit)
 
-    infix fun <T>filter(typeAndProperty: Pair <String, PropertyCriteria>): List<Apartament>?{
+    fun by(sortCrit: SortCriteria, propCrit: PropertyCriteria) = Pair<SortCriteria, PropertyCriteria>(sortCrit, propCrit)
+
+    infix fun filter(typeAndProperty: Pair <String, PropertyCriteria>): List<Apartament>?{
         var(crit, typeCrit) = typeAndProperty
-
         when(typeCrit){
             PropertyCriteria.RENT ->
                 return innerDataBase.filter{
